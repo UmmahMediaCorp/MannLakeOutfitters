@@ -341,14 +341,14 @@ export default function Home() {
               { value: 2019, suffix: "", label: "Established" },
               { value: 100, suffix: "%", label: "Saskatchewan Wild" },
               { value: 7, suffix: "mi", label: "Outpost Cabin Ride" },
-              { value: "∞", suffix: "", label: "Wildlife Species" },
+              { value: 12, suffix: "+", label: "Wildlife Species" },
             ].map((stat, i) => (
               <div key={i} className="stat-block">
                 <div
                   className="font-display mb-1"
                   style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "var(--ember)", lineHeight: 1 }}
                 >
-                  {stat.value === "∞" ? "∞" : <Counter target={stat.value as number} suffix={stat.suffix} />}
+                  <Counter target={stat.value as number} suffix={stat.suffix} />
                 </div>
                 <div className="font-ui text-xs" style={{ color: "var(--bone-dim)", opacity: 0.6 }}>
                   {stat.label}
