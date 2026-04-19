@@ -163,7 +163,7 @@ const FISH_TROPHIES = [
   { src: PHOTO_TROUT_MAN,         alt: "Lake Trout — Open Water" },
   { src: PHOTO_TROUT_WOMAN,       alt: "Lake Trout — Big Sky" },
   { src: PHOTO_TROUT_HARBERCRAFT, alt: "Lake Trout — On the Boat" },
-  { src: "/images/lake-trout-elder.webp", alt: "Lake Trout — Elder Catch" },
+  { src: "/images/trophy-walleye.webp", alt: "Walleye — Sunset Catch" },
 ];
 
 export default function Home() {
