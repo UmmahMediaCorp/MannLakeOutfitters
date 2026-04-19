@@ -22,7 +22,7 @@ export default function Footer({ theme = "amber" }: FooterProps) {
               <div className="font-display tracking-widest leading-none text-2xl" style={{ color: accentColor }}>OUTFITTERS</div>
             </div>
             <p className="font-body text-sm leading-relaxed" style={{ color: "var(--bone-dim)" }}>
-              Trophy whitetail deer, black bear, and world-class fishing in the heart of Saskatchewan's Porcupine Provincial Forest.
+              Trophy whitetail deer, black bear, and world-class fishing in the heart of Saskatchewan.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export default function Footer({ theme = "amber" }: FooterProps) {
                 (306) 547-1220
               </a>
               <p className="font-ui text-xs mt-2" style={{ color: "var(--bone-dim)" }}>
-                10 miles east of Endeavour<br />
+                10 miles west of Endeavour<br />
                 East Central Saskatchewan
               </p>
             </div>

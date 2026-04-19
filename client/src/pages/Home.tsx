@@ -326,7 +326,7 @@ export default function Home() {
                 WILD
               </h2>
               <p className="font-body text-base leading-relaxed mb-6" style={{ color: "var(--bone-dim)" }}>
-                If you are looking to hunt trophy Saskatchewan whitetail deer, let Mann Lake Outfitters guide you to your dream deer. Located in east central Saskatchewan bordering the southern fringe of the Porcupine Provincial Forest, our main camp is situated 10 miles west of Endeavour — on the farm I grew up on and am so fortunate to still call home.
+                If you are looking to hunt trophy Saskatchewan whitetail deer, let Mann Lake Outfitters guide you to your dream deer. Located in east central Saskatchewan, our main camp is situated 10 miles west of Endeavour — on the farm I grew up on and am so fortunate to still call home.
               </p>
               <p className="font-body text-base leading-relaxed mb-10" style={{ color: "var(--bone-dim)" }}>
                 For the outdoorsman who wants a little more adventure, there is an outpost cabin — a seven-mile quad or snowmobile ride through the tall timbers into the heart of our hunting territory. Our territory is second to none for whitetail deer, along with many other species including moose, elk, bear, wolves, lynx, and countless birds.
