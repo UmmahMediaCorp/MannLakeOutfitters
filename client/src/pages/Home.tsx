@@ -151,10 +151,17 @@ const galleryImages = [
 
 const trophyImages = DEER_TROPHIES.map((src, i) => ({ src, alt: `Trophy Whitetail ${i + 1}` }));
 
+const BEAR_TROPHIES = [
+  { src: PHOTO_BEAR_BOW,    alt: "Black Bear — Bowhunt" },
+  { src: PHOTO_BEAR_DOUBLE, alt: "Double Bear — Black & Cinnamon Phase" },
+  { src: PHOTO_BEAR_BOREAL, alt: "Black Bear — Boreal Forest" },
+];
+
 export default function Home() {
   const [lightbox, setLightbox] = useState<{ images: { src: string; alt: string }[]; index: number } | null>(null);
   const setLightboxIndex = (index: number) => setLightbox({ images: galleryImages, index });
   const setTrophyLightboxIndex = (index: number) => setLightbox({ images: trophyImages, index });
+  const setBearLightboxIndex = (index: number) => setLightbox({ images: BEAR_TROPHIES, index });
   const heroRef = useRef<HTMLElement>(null);
 
   const about = useReveal();
@@ -162,6 +169,7 @@ export default function Home() {
   const whitetailSection = useReveal(0.1);
   const trophyWallSection = useReveal(0.05);
   const bearSection = useReveal(0.1);
+  const bearTrophySection = useReveal(0.05);
   const fishingSection = useReveal(0.1);
   const gallerySection = useReveal(0.1);
   const costiganSection = useReveal(0.1);
@@ -503,6 +511,41 @@ export default function Home() {
               <span>Book a Bear Hunt</span>
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* ===== BLACK BEAR TROPHY WALL ===== */}
+      <section style={{ background: "var(--canvas)" }} ref={bearTrophySection.ref}>
+        <div className={`text-center pt-24 pb-12 reveal ${bearTrophySection.visible ? "visible" : ""}`}>
+          <span className="overline">Recent Bear Hunts</span>
+          <h2
+            className="font-display"
+            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", color: "var(--bone)", lineHeight: 0.95 }}
+          >
+            BLACK BEAR <span style={{ color: "var(--ember)" }}>TROPHIES</span>
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: "2px", background: "var(--canvas)" }}>
+          {BEAR_TROPHIES.map((src, i) => (
+            <div
+              key={i}
+              className={`reveal delay-${(i % 3) * 100 + 100} ${bearTrophySection.visible ? "visible" : ""}`}
+              style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", cursor: "pointer" }}
+              onClick={() => setBearLightboxIndex(i)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setBearLightboxIndex(i)}
+            >
+              <img
+                src={src.src}
+                alt={src.alt}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.7s ease" }}
+                className="amenity-tile-img"
+                loading="lazy"
+              />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,13,11,0) 50%, rgba(13,13,11,0.4) 100%)" }} />
+            </div>
+          ))}
         </div>
       </section>
 
