@@ -146,7 +146,6 @@ const galleryImages = [
   { src: PHOTO_TROUT_MAN,       alt: "Lake Trout — Open Water" },
   { src: PHOTO_TROUT_WOMAN,     alt: "Lake Trout — Big Sky" },
   { src: PHOTO_TROUT_HARBERCRAFT, alt: "Lake Trout — On the Boat" },
-  { src: PHOTO_SUNSET_ROD,      alt: "Sunset on the Water" },
 ];
 
 const trophyImages = DEER_TROPHIES.map((src, i) => ({ src, alt: `Trophy Whitetail ${i + 1}` }));
