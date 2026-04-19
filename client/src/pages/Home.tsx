@@ -141,9 +141,6 @@ function Lightbox({
 }
 
 const galleryImages = [
-  { src: PHOTO_BEAR_BOW,        alt: "Black Bear — Bowhunt" },
-  { src: PHOTO_BEAR_DOUBLE,     alt: "Double Bear — Black & Cinnamon Phase" },
-  { src: PHOTO_BEAR_BOREAL,     alt: "Black Bear — Boreal Forest" },
   { src: PHOTO_PIKE_PONTOON,    alt: "Northern Pike — Trophy Catch" },
   { src: PHOTO_PIKE_WOMAN,      alt: "Northern Pike — Evening Catch" },
   { src: PHOTO_TROUT_MAN,       alt: "Lake Trout — Open Water" },
