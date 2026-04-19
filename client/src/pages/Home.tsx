@@ -150,11 +150,14 @@ const galleryImages = [
   { src: PHOTO_TROUT_WOMAN,     alt: "Lake Trout — Big Sky" },
   { src: PHOTO_TROUT_HARBERCRAFT, alt: "Lake Trout — On the Boat" },
   { src: PHOTO_SUNSET_ROD,      alt: "Sunset on the Water" },
-  ...DEER_TROPHIES.map((src, i) => ({ src, alt: `Trophy Whitetail ${i + 1}` })),
 ];
 
+const trophyImages = DEER_TROPHIES.map((src, i) => ({ src, alt: `Trophy Whitetail ${i + 1}` }));
+
 export default function Home() {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [lightbox, setLightbox] = useState<{ images: { src: string; alt: string }[]; index: number } | null>(null);
+  const setLightboxIndex = (index: number) => setLightbox({ images: galleryImages, index });
+  const setTrophyLightboxIndex = (index: number) => setLightbox({ images: trophyImages, index });
   const heroRef = useRef<HTMLElement>(null);
 
   const about = useReveal();
@@ -434,10 +437,10 @@ export default function Home() {
               key={i}
               className={`reveal delay-${(i % 3) * 100 + 100} ${trophyWallSection.visible ? "visible" : ""}`}
               style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", cursor: "pointer" }}
-              onClick={() => setLightboxIndex(galleryImages.length - DEER_TROPHIES.length + i)}
+              onClick={() => setTrophyLightboxIndex(i)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => e.key === "Enter" && setLightboxIndex(galleryImages.length - DEER_TROPHIES.length + i)}
+              onKeyDown={(e) => e.key === "Enter" && setTrophyLightboxIndex(i)}
             >
               <img
                 src={src}
@@ -698,13 +701,13 @@ export default function Home() {
       <Footer theme="amber" />
 
       {/* Lightbox */}
-      {lightboxIndex !== null && (
+      {lightbox !== null && (
         <Lightbox
-          images={galleryImages}
-          index={lightboxIndex}
-          onClose={() => setLightboxIndex(null)}
-          onPrev={() => setLightboxIndex((i) => Math.max(0, (i ?? 0) - 1))}
-          onNext={() => setLightboxIndex((i) => Math.min(galleryImages.length - 1, (i ?? 0) + 1))}
+          images={lightbox.images}
+          index={lightbox.index}
+          onClose={() => setLightbox(null)}
+          onPrev={() => setLightbox((s) => s ? { ...s, index: Math.max(0, s.index - 1) } : null)}
+          onNext={() => setLightbox((s) => s ? { ...s, index: Math.min(s.images.length - 1, s.index + 1) } : null)}
         />
       )}
     </div>
