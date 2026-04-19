@@ -430,17 +430,15 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3" style={{ gap: "2px", background: "var(--canvas)" }}>
           {DEER_TROPHIES.map((src, i) => {
-            const isLastTile = i === DEER_TROPHIES.length - 1;
-            const lastSoloOnMd = DEER_TROPHIES.length % 3 === 1;
-            const lastSoloOnSm = DEER_TROPHIES.length % 2 === 1;
-            const spanMd = isLastTile && lastSoloOnMd ? "md:col-span-3" : "";
-            const spanSm = isLastTile && lastSoloOnSm ? "col-span-2" : "";
-            const wide = isLastTile && (lastSoloOnMd || lastSoloOnSm);
+            // Hide overflow tiles on desktop (3-col) so the grid stays clean (3x3, no orphan).
+            // Mobile (2-col) shows all photos.
+            const desktopMax = Math.floor(DEER_TROPHIES.length / 3) * 3;
+            const hideOnMd = i >= desktopMax ? "md:hidden" : "";
             return (
             <div
               key={i}
-              className={`reveal delay-${(i % 3) * 100 + 100} ${trophyWallSection.visible ? "visible" : ""} ${spanSm} ${spanMd}`.trim()}
-              style={{ position: "relative", aspectRatio: wide ? "16/6" : "4/3", overflow: "hidden", cursor: "pointer" }}
+              className={`reveal delay-${(i % 3) * 100 + 100} ${trophyWallSection.visible ? "visible" : ""} ${hideOnMd}`.trim()}
+              style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", cursor: "pointer" }}
               onClick={() => setTrophyLightboxIndex(i)}
               role="button"
               tabIndex={0}
