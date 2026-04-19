@@ -157,11 +157,21 @@ const BEAR_TROPHIES = [
   { src: PHOTO_BEAR_BOREAL, alt: "Black Bear — Boreal Forest" },
 ];
 
+const FISH_TROPHIES = [
+  { src: PHOTO_PIKE_PONTOON,      alt: "Northern Pike — Trophy Catch" },
+  { src: PHOTO_PIKE_WOMAN,        alt: "Northern Pike — Evening Catch" },
+  { src: PHOTO_TROUT_MAN,         alt: "Lake Trout — Open Water" },
+  { src: PHOTO_TROUT_WOMAN,       alt: "Lake Trout — Big Sky" },
+  { src: PHOTO_TROUT_HARBERCRAFT, alt: "Lake Trout — On the Boat" },
+  { src: "/images/lake-trout-elder.webp", alt: "Lake Trout — Elder Catch" },
+];
+
 export default function Home() {
   const [lightbox, setLightbox] = useState<{ images: { src: string; alt: string }[]; index: number } | null>(null);
   const setLightboxIndex = (index: number) => setLightbox({ images: galleryImages, index });
   const setTrophyLightboxIndex = (index: number) => setLightbox({ images: trophyImages, index });
   const setBearLightboxIndex = (index: number) => setLightbox({ images: BEAR_TROPHIES, index });
+  const setFishLightboxIndex = (index: number) => setLightbox({ images: FISH_TROPHIES, index });
   const heroRef = useRef<HTMLElement>(null);
 
   const about = useReveal();
@@ -578,54 +588,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== GALLERY ===== */}
-      <section id="gallery" style={{ background: "var(--canvas-2)" }} ref={gallerySection.ref}>
-        <div className="container pt-24 pb-8">
-          <div className={`reveal ${gallerySection.visible ? "visible" : ""}`}>
-            <span className="overline">In the Field</span>
-            <h2
-              className="font-display mb-2"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", color: "var(--bone)", lineHeight: 0.95 }}
-            >
-              TROPHY MOMENTS
-            </h2>
-            <p className="font-ui text-xs mb-12" style={{ color: "var(--bone-dim)", opacity: 0.5 }}>
-              Click any photo to view full screen
-            </p>
-          </div>
+      {/* ===== FISH TROPHY WALL ===== */}
+      <section id="gallery" style={{ background: "var(--canvas)" }} ref={gallerySection.ref}>
+        <div className={`text-center pt-24 pb-12 reveal ${gallerySection.visible ? "visible" : ""}`}>
+          <span className="overline">Recent Catches</span>
+          <h2
+            className="font-display"
+            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", color: "var(--bone)", lineHeight: 0.95 }}
+          >
+            FISH <span style={{ color: "var(--ember)" }}>TROPHIES</span>
+          </h2>
         </div>
-
-        {/* Masonry-style grid */}
-        <div className="px-0 pb-0">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px">
-            {galleryImages.map((img, i) => (
-              <div
-                key={i}
-                className={`photo-hover relative ${i === 0 || i === 5 ? "row-span-2" : ""}`}
-                style={{
-                  aspectRatio: i === 0 || i === 5 ? "3/4" : "4/3",
-                  cursor: "pointer",
-                }}
-                onClick={() => setLightboxIndex(i)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && setLightboxIndex(i)}
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div
-                  className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4"
-                  style={{ background: "linear-gradient(to top, rgba(13,13,11,0.8) 0%, transparent 60%)" }}
-                >
-                  <span className="font-ui text-xs" style={{ color: "var(--bone-dim)" }}>{img.alt}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="grid grid-cols-2 md:grid-cols-3" style={{ gap: "2px", background: "var(--canvas)" }}>
+          {FISH_TROPHIES.map((img, i) => (
+            <div
+              key={i}
+              className={`reveal delay-${(i % 3) * 100 + 100} ${gallerySection.visible ? "visible" : ""}`}
+              style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", cursor: "pointer" }}
+              onClick={() => setFishLightboxIndex(i)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setFishLightboxIndex(i)}
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.7s ease" }}
+                className="amenity-tile-img"
+                loading="lazy"
+              />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,13,11,0) 50%, rgba(13,13,11,0.4) 100%)" }} />
+            </div>
+          ))}
         </div>
       </section>
 
