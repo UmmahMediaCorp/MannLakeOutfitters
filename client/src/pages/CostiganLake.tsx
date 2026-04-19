@@ -454,9 +454,9 @@ export default function CostiganLake() {
           </h2>
         </div>
 
-        {/* 6-tile cinematic grid — no container, full-bleed */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: "2px", background: "#060e18" }}>
-          {[
+        {/* Cinematic amenity grid — full-bleed; last orphan tile spans wide as a feature banner */}
+        {(() => {
+          const items = [
             {
               img: "/images/amenity-boats.webp",
               title: "BOATS",
@@ -492,11 +492,26 @@ export default function CostiganLake() {
               title: "SHORE LUNCH",
               desc: "Fresh-caught fish prepared lakeside — a Saskatchewan tradition and the highlight of every guided day.",
             },
-          ].map((item, i) => (
+          ];
+          const isLastTileSoloLg = items.length % 3 === 1;
+          const isLastTileSoloMd = items.length % 2 === 1;
+          return (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: "2px", background: "#060e18" }}>
+          {items.map((item, i) => {
+            const isLastTile = i === items.length - 1;
+            const spanLg = isLastTile && isLastTileSoloLg ? "lg:col-span-3" : "";
+            const spanMd = isLastTile && isLastTileSoloMd ? "md:col-span-2" : "";
+            const spanClass = `${spanLg} ${spanMd}`.trim();
+            const wideRatio = isLastTile && (isLastTileSoloLg || isLastTileSoloMd);
+            return (
             <div
               key={i}
-              className={`reveal delay-${(i % 3) * 100 + 100} ${amenitiesSection.visible ? "visible" : ""}`}
-              style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden" }}
+              className={`reveal delay-${(i % 3) * 100 + 100} ${amenitiesSection.visible ? "visible" : ""} ${spanClass}`}
+              style={{
+                position: "relative",
+                aspectRatio: wideRatio ? "16/6" : "4/3",
+                overflow: "hidden",
+              }}
             >
               {/* Full-bleed background photo */}
               <img
@@ -562,8 +577,11 @@ export default function CostiganLake() {
                 </p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
+          );
+        })()}
       </section>
 
       {/* ===== CONTACT ===== */}
