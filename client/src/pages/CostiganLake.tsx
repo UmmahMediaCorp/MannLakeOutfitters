@@ -94,7 +94,7 @@ const allPhotos = [
   { src: PHOTO_PIKE_WOMAN,       alt: "Northern Pike — Evening Catch" },
   { src: PHOTO_TROUT_MAN,        alt: "Lake Trout — Open Water" },
   { src: PHOTO_TROUT_WOMAN,      alt: "Lake Trout — Big Sky" },
-  { src: PHOTO_TROUT_HARBERCRAFT, alt: "Lake Trout — Harbercraft" },
+  { src: PHOTO_TROUT_HARBERCRAFT, alt: "Lake Trout — On the Boat" },
   { src: PHOTO_BEAR_BOW,         alt: "Black Bear — Bowhunt" },
   { src: PHOTO_BEAR_DOUBLE,      alt: "Double Bear — Black & Cinnamon Phase" },
   { src: PHOTO_BEAR_BOREAL,      alt: "Black Bear — Boreal Forest" },
@@ -377,13 +377,13 @@ export default function CostiganLake() {
                 Deep, cold, and crystal-clear — Costigan Lake's Lake Trout fishery is exceptional. These fish grow large in the pristine northern waters, and the experience of pulling a trophy laker from the deep is unlike anything else in the sport.
               </p>
               <p className="font-body text-base leading-relaxed mb-8" style={{ color: "var(--bone-dim)" }}>
-                Our Harbercraft boats are fully equipped and our guides know these waters intimately. Whether you're jigging deep structure or trolling the open water, you'll be on fish.
+                Our boats are fully equipped and our guides know these waters intimately. Whether you're jigging deep structure or trolling the open water, you'll be on fish.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { label: "Depth", value: "Deep Structure" },
                   { label: "Method", value: "Jigging & Trolling" },
-                  { label: "Boat", value: "Harbercraft" },
+                  { label: "Boat", value: "Fully Rigged" },
                   { label: "Season", value: "Open Water" },
                 ].map((s, i) => (
                   <div key={i} className="stat-block py-2">
@@ -459,7 +459,7 @@ export default function CostiganLake() {
           {[
             {
               img: "/images/amenity-boats.webp",
-              title: "HARBERCRAFT BOATS",
+              title: "BOATS",
               desc: "Fully equipped fishing boats with all tackle and gear provided.",
             },
             {
@@ -617,7 +617,7 @@ export default function CostiganLake() {
                 {[
                   "Fishing, hunting, and combination packages",
                   "All-inclusive lodge accommodations",
-                  "Harbercraft boats and full tackle provided",
+                  "Boats and full tackle provided",
                   "Expert local guides",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">

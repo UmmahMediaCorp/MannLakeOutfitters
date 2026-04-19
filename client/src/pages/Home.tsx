@@ -31,6 +31,19 @@ const PHOTO_TROUT_HARBERCRAFT = "/images/IMG_6267.webp"; // Elder man with Lake 
 const PHOTO_SUNSET_ROD = "/images/IMG_6658.webp";      // Fishing rod silhouette against golden sunset
 const PHOTO_PIKE_WOMAN = "/images/IMG_1738.webp";      // Woman holding large Northern Pike (boreal lake, evening)
 
+/* ---- Whitetail Trophy Photos ---- */
+const DEER_TROPHIES = [
+  "/images/deer-trophy-1.webp",
+  "/images/deer-trophy-2.webp",
+  "/images/deer-trophy-3.webp",
+  "/images/deer-trophy-4.webp",
+  "/images/deer-trophy-5.webp",
+  "/images/deer-trophy-6.webp",
+  "/images/deer-trophy-7.webp",
+  "/images/deer-trophy-8.webp",
+  "/images/deer-trophy-9.webp",
+];
+
 /* ---- Scroll Reveal Hook ---- */
 function useReveal(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -135,8 +148,9 @@ const galleryImages = [
   { src: PHOTO_PIKE_WOMAN,      alt: "Northern Pike — Evening Catch" },
   { src: PHOTO_TROUT_MAN,       alt: "Lake Trout — Open Water" },
   { src: PHOTO_TROUT_WOMAN,     alt: "Lake Trout — Big Sky" },
-  { src: PHOTO_TROUT_HARBERCRAFT, alt: "Lake Trout — Harbercraft" },
+  { src: PHOTO_TROUT_HARBERCRAFT, alt: "Lake Trout — On the Boat" },
   { src: PHOTO_SUNSET_ROD,      alt: "Sunset on the Water" },
+  ...DEER_TROPHIES.map((src, i) => ({ src, alt: `Trophy Whitetail ${i + 1}` })),
 ];
 
 export default function Home() {
@@ -146,6 +160,7 @@ export default function Home() {
   const about = useReveal();
   const statsRow = useReveal(0.3);
   const whitetailSection = useReveal(0.1);
+  const trophyWallSection = useReveal(0.05);
   const bearSection = useReveal(0.1);
   const fishingSection = useReveal(0.1);
   const gallerySection = useReveal(0.1);
@@ -231,7 +246,7 @@ export default function Home() {
                 className="font-body text-lg md:text-xl italic"
                 style={{ color: "var(--bone-dim)", maxWidth: "500px" }}
               >
-                Trophy whitetail deer, black bear, and world-class fishing in the heart of the Porcupine Provincial Forest.
+                Trophy whitetail deer, black bear, and world-class fishing in the heart of Saskatchewan.
               </p>
             </div>
 
@@ -312,7 +327,7 @@ export default function Home() {
                 WILD
               </h2>
               <p className="font-body text-base leading-relaxed mb-6" style={{ color: "var(--bone-dim)" }}>
-                If you are looking to hunt trophy Saskatchewan whitetail deer, let Mann Lake Outfitters guide you to your dream deer. Located in east central Saskatchewan bordering the southern fringe of the Porcupine Provincial Forest, our main camp is situated 10 miles east of Endeavour — on the farm I grew up on and am so fortunate to still call home.
+                If you are looking to hunt trophy Saskatchewan whitetail deer, let Mann Lake Outfitters guide you to your dream deer. Located in east central Saskatchewan bordering the southern fringe of the Porcupine Provincial Forest, our main camp is situated 10 miles west of Endeavour — on the farm I grew up on and am so fortunate to still call home.
               </p>
               <p className="font-body text-base leading-relaxed mb-10" style={{ color: "var(--bone-dim)" }}>
                 For the outdoorsman who wants a little more adventure, there is an outpost cabin — a seven-mile quad or snowmobile ride through the tall timbers into the heart of our hunting territory. Our territory is second to none for whitetail deer, along with many other species including moose, elk, bear, wolves, lynx, and countless birds.
@@ -378,13 +393,13 @@ export default function Home() {
             </h2>
             <span className="ember-line" />
             <p className="font-body text-base leading-relaxed mb-8" style={{ color: "var(--bone-dim)" }}>
-              Trophy Saskatchewan whitetail in second-to-none territory. Archery season opens October 1st, Muzzleloader and Rifle through November 30th. Our territory produces consistently impressive bucks year after year.
+              Trophy Saskatchewan whitetail in second-to-none territory. Archery and Muzzleloader open October 1st through 31st, Rifle from November 1st through December 7th. Our territory produces consistently impressive bucks year after year.
             </p>
             <div className="grid grid-cols-3 gap-4 mb-8">
               {[
                 { season: "Archery", dates: "Oct 1 – 31" },
-                { season: "Muzzleloader", dates: "Nov 1 – 14" },
-                { season: "Rifle", dates: "Nov 15 – 30" },
+                { season: "Muzzleloader", dates: "Oct 1 – 31" },
+                { season: "Rifle", dates: "Nov 1 – Dec 7" },
               ].map((s, i) => (
                 <div key={i} className="stat-block py-2">
                   <div className="font-ui text-xs mb-1" style={{ color: "var(--ember)" }}>{s.season}</div>
@@ -399,6 +414,41 @@ export default function Home() {
               <span>Book a Deer Hunt</span>
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* ===== WHITETAIL TROPHY WALL ===== */}
+      <section style={{ background: "var(--canvas)" }} ref={trophyWallSection.ref}>
+        <div className={`text-center pt-24 pb-12 reveal ${trophyWallSection.visible ? "visible" : ""}`}>
+          <span className="overline">Recent Hunts</span>
+          <h2
+            className="font-display"
+            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", color: "var(--bone)", lineHeight: 0.95 }}
+          >
+            TROPHY <span style={{ color: "var(--ember)" }}>WALL</span>
+          </h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3" style={{ gap: "2px", background: "var(--canvas)" }}>
+          {DEER_TROPHIES.map((src, i) => (
+            <div
+              key={i}
+              className={`reveal delay-${(i % 3) * 100 + 100} ${trophyWallSection.visible ? "visible" : ""}`}
+              style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", cursor: "pointer" }}
+              onClick={() => setLightboxIndex(galleryImages.length - DEER_TROPHIES.length + i)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setLightboxIndex(galleryImages.length - DEER_TROPHIES.length + i)}
+            >
+              <img
+                src={src}
+                alt={`Trophy whitetail ${i + 1}`}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.7s ease" }}
+                className="amenity-tile-img"
+                loading="lazy"
+              />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,13,11,0) 50%, rgba(13,13,11,0.4) 100%)" }} />
+            </div>
+          ))}
         </div>
       </section>
 
@@ -602,7 +652,7 @@ export default function Home() {
                 <div className="stat-block">
                   <div className="font-ui text-xs mb-1" style={{ color: "var(--ember)" }}>Location</div>
                   <div className="font-body text-base" style={{ color: "var(--bone-dim)" }}>
-                    10 miles east of Endeavour<br />
+                    10 miles west of Endeavour<br />
                     East Central Saskatchewan
                   </div>
                 </div>
