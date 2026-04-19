@@ -42,6 +42,7 @@ const DEER_TROPHIES = [
   "/images/deer-trophy-7.webp",
   "/images/deer-trophy-8.webp",
   "/images/deer-trophy-9.webp",
+  "/images/deer-trophy-10.webp",
 ];
 
 /* ---- Scroll Reveal Hook ---- */
@@ -428,11 +429,18 @@ export default function Home() {
           </h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3" style={{ gap: "2px", background: "var(--canvas)" }}>
-          {DEER_TROPHIES.map((src, i) => (
+          {DEER_TROPHIES.map((src, i) => {
+            const isLastTile = i === DEER_TROPHIES.length - 1;
+            const lastSoloOnMd = DEER_TROPHIES.length % 3 === 1;
+            const lastSoloOnSm = DEER_TROPHIES.length % 2 === 1;
+            const spanMd = isLastTile && lastSoloOnMd ? "md:col-span-3" : "";
+            const spanSm = isLastTile && lastSoloOnSm ? "col-span-2" : "";
+            const wide = isLastTile && (lastSoloOnMd || lastSoloOnSm);
+            return (
             <div
               key={i}
-              className={`reveal delay-${(i % 3) * 100 + 100} ${trophyWallSection.visible ? "visible" : ""}`}
-              style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", cursor: "pointer" }}
+              className={`reveal delay-${(i % 3) * 100 + 100} ${trophyWallSection.visible ? "visible" : ""} ${spanSm} ${spanMd}`.trim()}
+              style={{ position: "relative", aspectRatio: wide ? "16/6" : "4/3", overflow: "hidden", cursor: "pointer" }}
               onClick={() => setTrophyLightboxIndex(i)}
               role="button"
               tabIndex={0}
@@ -447,7 +455,8 @@ export default function Home() {
               />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,13,11,0) 50%, rgba(13,13,11,0.4) 100%)" }} />
             </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
