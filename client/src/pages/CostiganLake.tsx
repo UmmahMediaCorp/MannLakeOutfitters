@@ -488,7 +488,7 @@ export default function CostiganLake() {
               desc: "Combine fishing with black bear hunting for the ultimate Saskatchewan experience.",
             },
             {
-              img: "/images/IMG_7872.webp",
+              img: "/images/amenity-shore-lunch.webp",
               title: "SHORE LUNCH",
               desc: "Fresh-caught fish prepared lakeside — a Saskatchewan tradition and the highlight of every guided day.",
             },
