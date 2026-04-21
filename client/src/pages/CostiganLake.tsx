@@ -381,7 +381,7 @@ export default function CostiganLake() {
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { label: "Depth", value: "Deep Structure" },
+                  { label: "Depth", value: "125+ Feet" },
                   { label: "Method", value: "Jigging & Trolling" },
                   { label: "Boat", value: "Fully Rigged" },
                   { label: "Season", value: "Open Water" },
